@@ -1,0 +1,8 @@
+GENDER_NONE = 0
+GENDER_MALE = 1
+GENDER_FEMALE = 2
+GENDERS = (
+    (GENDER_NONE, ''),
+    (GENDER_MALE, 'Male'),
+    (GENDER_FEMALE, 'Female'),
+)
