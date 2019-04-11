@@ -1,7 +1,7 @@
 import environ
 
 ROOT_DIR = environ.Path(__file__) - 3
-PROJECT_DIR = ROOT_DIR.path('{{ project_name }}')
+PROJECT_DIR = ROOT_DIR.path('shmango')
 APPS_DIR = PROJECT_DIR.path('apps')
 
 env = environ.Env()
@@ -32,8 +32,8 @@ DATABASES['default']['CONN_MAX_AGE'] = env.int('CONN_MAX_AGE', default=60)
 
 # URLS
 # ------------------------------------------------------------------------------
-ROOT_URLCONF = '{{ project_name }}.urls'
-WSGI_APPLICATION = '{{ project_name }}.wsgi.application'
+ROOT_URLCONF = 'shmango.urls'
+WSGI_APPLICATION = 'shmango.wsgi.application'
 
 # APPS
 # ------------------------------------------------------------------------------
@@ -49,8 +49,8 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
-    '{{ project_name }}.apps.users',
-    '{{ project_name }}.apps.profiles',
+    'shmango.apps.users',
+    'shmango.apps.profiles',
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
