@@ -11,10 +11,10 @@ class Profile(models.Model):
         choices=constants.GENDERS,
         default=constants.GENDER_NONE,
     )
+    subscribed = models.BooleanField(default=False)
 
     def get_full_name(self):
         return '{} {}'.format(self.last_name, self.first_name)
 
     def get_short_name(self):
         return self.first_name
-

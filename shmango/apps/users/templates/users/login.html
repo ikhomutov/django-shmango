@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ block.super }} - Log In{% endblock %}
+{% block content %}
+  <form class="form-custom" method="POST" action="{% url 'users:login' %}">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="form-label-group">
+        {{ field }}
+      </div>
+    {% endfor %}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+    <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+
+  </form>
+{% endblock %}

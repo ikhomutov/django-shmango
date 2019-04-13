@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}{{ block.super }} - Sign Up{% endblock %}
+{% block content %}
+  <form class="form-custom" method="post" action="{% url 'users:signup' %}">
+    <h1 class="h3 mb-3 font-weight-normal">Sign up with</h1>
+      <div class="social-btn text-center">
+        <a href="{% url 'social:begin' 'github' %}"><i class="fa fa-github"></i> GitHub</a>
+        <a href="{% url 'social:begin' 'google' %}"><i class="fa fa-google"></i> Google</a>
+      </div>
+      <div class="or-seperator"><b>or</b></div>
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          {{ field }}
+          {% if field.name == 'subscribed' %}<label for="id_{{ field.name }}">{{ field.label }}</label>{% endif %}
+        </div>
+      {% endfor %}
+    <div class="text-center">
+      By signing up, I agree to the <a href="{% url 'terms' %}">Terms of Service</a>
+      and <a href="{% url 'privacy' %}">Privacy Policy</a>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+  </form>
+{% endblock %}
+		<h2>Create an Account</h2>
+        <div class="form-group">
+        	<input type="text" class="form-control input-lg" name="username" placeholder="Username" required="required">
+        </div>
+      <div class="form-group">
+        	<input type="email" class="form-control input-lg" name="email" placeholder="Email Address" required="required">
+        </div>
+		<div class="form-group">
+            <input type="password" class="form-control input-lg" name="password" placeholder="Password" required="required">
+        </div>
+		<div class="form-group">
+            <input type="password" class="form-control input-lg" name="confirm_password" placeholder="Confirm Password" required="required">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block signup-btn">Sign Up</button>
+        </div>
+    </form>
