@@ -47,6 +47,7 @@ DJANGO_APPS = [
     'django.contrib.admin',
 ]
 THIRD_PARTY_APPS = [
+    'social_django',
 ]
 LOCAL_APPS = [
     'shmango.apps.users',
@@ -57,8 +58,11 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
 AUTH_USER_MODEL = 'users.User'
+LOGIN_URL = "users:login"
+LOGIN_REDIRECT_URL = "users:index"
 
 AUTHENTICATION_BACKENDS = [
+    'social_core.backends.github.GithubOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -91,23 +95,23 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 # STATIC
 # ------------------------------------------------------------------------------
 STATIC_ROOT = str(ROOT_DIR('staticfiles'))
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    str(APPS_DIR.path('static')),
-]
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # MEDIA
 # ------------------------------------------------------------------------------
-MEDIA_ROOT = str(ROOT_DIR('media'))
+MEDIA_ROOT = str(PROJECT_DIR('media'))
 MEDIA_URL = '/media/'
 
 # TEMPLATES
@@ -133,6 +137,8 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -200,3 +206,10 @@ LOGGING = {
         }
     }
 }
+
+# SOCIAL AUTH APP
+# ------------------------------------------------------------------------------
+SOCIAL_AUTH_USER_MODEL = 'users.User'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'users:index'
+SOCIAL_AUTH_GITHUB_KEY = env.str('SOCIAL_AUTH_GITHUB_KEY', '')
+SOCIAL_AUTH_GITHUB_SECRET = env.str('SOCIAL_AUTH_GITHUB_SECRET', '')
