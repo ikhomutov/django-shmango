@@ -2,15 +2,33 @@
 {% block title %}{{ block.super }} - Log In{% endblock %}
 {% block content %}
   <form class="form-custom" method="POST" action="{% url 'users:login' %}">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger">
+        {% for error in form.non_field_errors %}
+        <div>{{ error }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
     {% csrf_token %}
     {% for field in form %}
-      <div class="form-label-group">
+      <div class="form-group {% if field.errors %}is-invalid{% endif %}">
         {{ field }}
+        {% if field.errors %}
+          <div class="invalid-feedback">
+            {{ field.errors.0 }}
+          </div>
+        {% endif %}
       </div>
     {% endfor %}
     <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-    <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
-
+    <div class="or-seperator"><b>or</b></div>
+    <p class="text-center">Login with your social media account</p>
+    <p class="text-center social-btn">
+      <a href="{% url 'social:begin' 'github' %}" class="social-github"><i class="fa fa-github"></i>&nbsp;  GitHub</a>
+      <a href="{% url 'social:begin' 'google' %}" class="social-google"><i class="fa fa-google"></i>&nbsp;  Google</a>
+    </p>
+    <p class="text-center text-muted small">Don't have an account? <a href="{% url 'users:signup' %}">Sign up here!</a></p>
   </form>
 {% endblock %}

@@ -1,11 +1,13 @@
-from django.conf.urls import url
+from django.urls import path
 
+from .views import index_view
 from .views import login_view
 from .views import logout_view
 from .views import signup_view
 
 urlpatterns = [
-    url('login/', login_view, name='login'),
-    url('logout/', logout_view, name='logout'),
-    url('signup/', signup_view, name='signup'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+    path('signup/', signup_view, name='signup'),
+    path('', index_view, name='index')
 ]

@@ -39,5 +39,3 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_absolute_url(self):
         return reverse("users:detail", kwargs={"pk": self.id})
-
-

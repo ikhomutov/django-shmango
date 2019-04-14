@@ -8,7 +8,7 @@ env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=True)
 if READ_DOT_ENV_FILE:
-    env.read_env(str(ROOT_DIR.path('.env')))
+    env.read_env(str(ROOT_DIR.path('app.env')))
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ THIRD_PARTY_APPS = [
     'social_django',
 ]
 LOCAL_APPS = [
-    'shmango.apps.users',
+    'shmango.apps.users.apps.UsersConfig',
     'shmango.apps.profiles',
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -63,6 +63,7 @@ LOGIN_REDIRECT_URL = "users:index"
 
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -103,6 +104,10 @@ MIDDLEWARE = [
 # ------------------------------------------------------------------------------
 STATIC_ROOT = str(ROOT_DIR('staticfiles'))
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    str(PROJECT_DIR.path('static')),
+]
+
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -120,7 +125,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            str(APPS_DIR.path('templates')),
+            str(PROJECT_DIR.path('templates')),
         ],
         'OPTIONS': {
             'debug': DEBUG,
@@ -159,7 +164,7 @@ EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[Example]')
 
 # ADMIN
 # ------------------------------------------------------------------------------
-ADMIN_URL = env('DJANGO_ADMIN_URL', default=r'^admin/')
+ADMIN_URL = env('DJANGO_ADMIN_URL', default='admin/')
 ADMINS = [
     ("""Ivan Khomutov""", 'iskhomutov@gmail.com'),
 ]
@@ -211,5 +216,7 @@ LOGGING = {
 # ------------------------------------------------------------------------------
 SOCIAL_AUTH_USER_MODEL = 'users.User'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'users:index'
-SOCIAL_AUTH_GITHUB_KEY = env.str('SOCIAL_AUTH_GITHUB_KEY', '')
-SOCIAL_AUTH_GITHUB_SECRET = env.str('SOCIAL_AUTH_GITHUB_SECRET', '')
+SOCIAL_AUTH_GITHUB_KEY = env.str('GITHUB_KEY', '')
+SOCIAL_AUTH_GITHUB_SECRET = env.str('GITHUB_SECRET', '')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.str('GOOGLE_OAUTH2_KEY', '')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.str('GOOGLE_OAUTH2_SECRET', '')

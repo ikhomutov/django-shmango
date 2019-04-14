@@ -6,34 +6,37 @@ from .models import User
 
 
 class SignupForm(UserCreationForm):
-    first_name = forms.CharField(
-        widget=forms.TextInput(
-            attrs={'placeholder': 'First Name', 'autofocus': 'autofocus'}
-        )
-    )
-    last_name = forms.CharField(
-        widget=forms.TextInput(
-            attrs={'placeholder': 'Last Name', 'autofocus': 'autofocus'}
-        )
-    )
     email = forms.EmailField(
-        required=True,
-        widget=forms.TextInput(attrs={'type': 'email', 'placeholder': 'Email'})
+        label='Email',
+        widget=forms.EmailInput(
+            attrs={
+                'placeholder': 'Email',
+                'class': 'form-control',
+            }
+        )
     )
     password1 = forms.CharField(
         strip=False,
-        widget=forms.PasswordInput(attrs={'placeholder': 'Password'}),
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': 'Password',
+                'class': 'form-control',
+            }
+        ),
     )
     password2 = forms.CharField(
         strip=False,
-        widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}),
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': 'Confirm Password',
+                'class': 'form-control',
+            }
+        ),
     )
 
     class Meta:
         model = User
         fields = (
-            'first_name',
-            'last_name',
             'email',
             'password1',
             'password2',
@@ -43,12 +46,22 @@ class SignupForm(UserCreationForm):
 class LoginForm(forms.Form):
     email = forms.EmailField(
         label='Email',
-        widget=forms.TextInput(attrs={'type': 'email', 'placeholder': 'Email'})
+        widget=forms.EmailInput(
+            attrs={
+                'placeholder': 'Email',
+                'class': 'form-control',
+            }
+        )
     )
     password = forms.CharField(
         label="Password",
         strip=False,
-        widget=forms.PasswordInput(attrs={'placeholder': 'Password'}),
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': 'Password',
+                'class': 'form-control',
+            }
+        ),
     )
 
     error_messages = {

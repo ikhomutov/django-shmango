@@ -42,3 +42,24 @@ body {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
+.or-seperator {
+    margin-top: 20px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+}
+.or-seperator b {
+    padding: 0 10px;
+    background: #f7f7f7;
+    position: relative;
+    top: -11px;
+    z-index: 1;
+}
+.social-btn a{
+    padding: 0 20px;
+}
+.social-google {
+    color: red;
+}
+.social-github {
+    color: black;
+}
