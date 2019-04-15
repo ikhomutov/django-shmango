@@ -2,9 +2,16 @@
 {% block title %}{{ block.super }} - Sign Up{% endblock %}
 {% block content %}
   <form class="form-custom" method="post" action="{% url 'users:signup' %}">
-    <h1 class="h3 mb-3 font-weight-normal">Sign up with</h1>
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger">
+        {% for error in form.non_field_errors %}
+          <div>{{ error }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <h1 class="h6 mb-3 font-weight-bold text-uppercase">Sign up with</h1>
     <div class="text-center social-btn">
-      <a href="{% url 'social:begin' 'github' %}" class="social-github"><i class="fa fa-github"></i>&nbsp;  GitHub</a>
+      <a href="{% url 'social:begin' 'github' %}" class="social-github"><i class="fa fa-github"></i>&nbsp;  GitHub</a> /
       <a href="{% url 'social:begin' 'google' %}" class="social-google"><i class="fa fa-google"></i>&nbsp;  Google</a>
     </div>
     <div class="or-seperator"><b>or</b></div>
@@ -23,10 +30,14 @@
       {% endif %}
     </div>
     {% endfor %}
-    <div class="text-center">
+    <div class="text-justify text-muted small">
       By signing up, I agree to the <a href="{% url 'terms' %}">Terms of Service</a>
       and <a href="{% url 'privacy' %}">Privacy Policy</a>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    <button class="my-4 btn btn-lg btn-success btn-block" type="submit">Register</button>
+    <div class="text-justify font-weight-bold small">
+      <p class="float-left my-1">Already have an account?</p>
+      <a href="{% url 'users:login' %}" class="btn btn-outline-primary btn-sm float-right px-4">LOG IN</a>
+    </div>
   </form>
 {% endblock %}
