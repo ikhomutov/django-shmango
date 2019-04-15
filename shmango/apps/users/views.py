@@ -25,7 +25,6 @@ class SignupView(FormView):
 
     def form_valid(self, form):
         """Security check complete. Log the user in."""
-        import ipdb; ipdb.set_trace()
         form.save()
         return super().form_valid(form)
 

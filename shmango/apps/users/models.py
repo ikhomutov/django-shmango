@@ -9,7 +9,7 @@ from .managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField('email address', unique=True, blank=True)
+    email = models.EmailField('email address', unique=True)
     is_staff = models.BooleanField('staff status', default=False)
     is_blocked = models.BooleanField(default=False)
     block_comment = models.CharField(max_length=255, blank=True)

@@ -16,20 +16,9 @@
     </div>
     <div class="or-seperator"><b>or</b></div>
     {% csrf_token %}
-    {% for field in form %}
-    <div class="form-group">
-      {{ field }}
-      {% if field.errors %}
-        <div class="invalid-feedback">
-          <ul>
-            {% for error in field.errors %}
-              <li>{{ error }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
-    </div>
-    {% endfor %}
+    {% include 'include/field_email_widget.html' with input=form.email %}
+    {% include 'include/field_password_widget.html' with input=form.password1 %}
+    {% include 'include/field_password_widget.html' with input=form.password2 %}
     <div class="text-justify text-muted small">
       By signing up, I agree to the <a href="{% url 'terms' %}">Terms of Service</a>
       and <a href="{% url 'privacy' %}">Privacy Policy</a>

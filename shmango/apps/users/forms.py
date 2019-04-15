@@ -8,39 +8,24 @@ from .models import User
 class SignupForm(UserCreationForm):
     email = forms.EmailField(
         label='Email',
-        widget=forms.EmailInput(
-            attrs={
-                'placeholder': 'Email',
-                'class': 'form-control',
-            }
-        )
     )
     password1 = forms.CharField(
+        label='Password',
         strip=False,
-        widget=forms.PasswordInput(
-            attrs={
-                'placeholder': 'Password',
-                'class': 'form-control',
-            }
-        ),
     )
     password2 = forms.CharField(
+        label='Confirm Password',
         strip=False,
-        widget=forms.PasswordInput(
-            attrs={
-                'placeholder': 'Confirm Password',
-                'class': 'form-control',
-            }
-        ),
     )
 
     class Meta:
         model = User
         fields = (
             'email',
-            'password1',
-            'password2',
         )
+
+    def save(self, **kwargs):
+        super().save(**kwargs)
 
 
 class LoginForm(forms.Form):
