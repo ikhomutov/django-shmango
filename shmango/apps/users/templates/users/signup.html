@@ -16,6 +16,8 @@
     </div>
     <div class="or-seperator"><b>or</b></div>
     {% csrf_token %}
+    {% include 'include/field_text_widget.html' with input=form.first_name %}
+    {% include 'include/field_text_widget.html' with input=form.last_name %}
     {% include 'include/field_email_widget.html' with input=form.email %}
     {% include 'include/field_password_widget.html' with input=form.password1 %}
     {% include 'include/field_password_widget.html' with input=form.password2 %}

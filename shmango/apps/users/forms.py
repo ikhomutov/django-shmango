@@ -2,10 +2,19 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 
+from shmango.apps.profiles.models import Profile
 from .models import User
 
 
 class SignupForm(UserCreationForm):
+    first_name = forms.CharField(
+        label='First Name',
+        required=False,
+    )
+    last_name = forms.CharField(
+        label='Last Name',
+        required=False,
+    )
     email = forms.EmailField(
         label='Email',
     )
@@ -25,7 +34,15 @@ class SignupForm(UserCreationForm):
         )
 
     def save(self, **kwargs):
-        super().save(**kwargs)
+        user = super().save(**kwargs)
+        first_name = self.cleaned_data.get('first_name')
+        last_name = self.cleaned_data.get('last_name')
+        profile = Profile(
+            user=user,
+            first_name=first_name,
+            last_name=last_name
+        )
+        profile.save()
 
 
 class LoginForm(forms.Form):

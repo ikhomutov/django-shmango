@@ -18,7 +18,7 @@ LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
-USE_TZ = env.bool('DJANGO_USE_TZ', True)
+USE_TZ = env.bool('DJANGO_USE_TZ', default=True)
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=[])
 
@@ -216,7 +216,19 @@ LOGGING = {
 # ------------------------------------------------------------------------------
 SOCIAL_AUTH_USER_MODEL = 'users.User'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'users:index'
-SOCIAL_AUTH_GITHUB_KEY = env.str('GITHUB_KEY', '')
-SOCIAL_AUTH_GITHUB_SECRET = env.str('GITHUB_SECRET', '')
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.str('GOOGLE_OAUTH2_KEY', '')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.str('GOOGLE_OAUTH2_SECRET', '')
+SOCIAL_AUTH_GITHUB_KEY = env.str('GITHUB_KEY', default='')
+SOCIAL_AUTH_GITHUB_SECRET = env.str('GITHUB_SECRET', default='')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.str('GOOGLE_OAUTH2_KEY', default='')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.str('GOOGLE_OAUTH2_SECRET', default='')
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'shmango.apps.profiles.signals.create_profile',
+)
