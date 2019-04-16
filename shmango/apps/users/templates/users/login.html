@@ -19,7 +19,7 @@
     <p class="text-center">Login with your social media account</p>
     <p class="text-center social-btn">
       <a href="{% url 'social:begin' 'github' %}" class="social-github"><i class="fa fa-github"></i>&nbsp;  GitHub</a>
-      <a href="{% url 'social:begin' 'google' %}" class="social-google"><i class="fa fa-google"></i>&nbsp;  Google</a>
+      <a href="{% url 'social:begin' 'google-oauth2' %}" class="social-google"><i class="fa fa-google"></i>&nbsp;  Google</a>
     </p>
     <p class="text-center text-muted small">Don't have an account? <a href="{% url 'users:signup' %}">Sign up here!</a></p>
   </form>
