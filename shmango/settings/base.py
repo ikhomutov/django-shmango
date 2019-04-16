@@ -216,6 +216,7 @@ LOGGING = {
 # ------------------------------------------------------------------------------
 SOCIAL_AUTH_USER_MODEL = 'users.User'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'users:index'
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 SOCIAL_AUTH_GITHUB_KEY = env.str('GITHUB_KEY', default='')
 SOCIAL_AUTH_GITHUB_SECRET = env.str('GITHUB_SECRET', default='')
 SOCIAL_AUTH_GITHUB_SCOPE = ['email']
