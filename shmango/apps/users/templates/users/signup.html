@@ -21,6 +21,7 @@
     {% include 'include/field_email_widget.html' with input=form.email %}
     {% include 'include/field_password_widget.html' with input=form.password1 %}
     {% include 'include/field_password_widget.html' with input=form.password2 %}
+    {% include 'include/field_checkbox_widget.html' with input=form.subscribed %}
     <div class="text-justify text-muted small">
       By signing up, I agree to the <a href="{% url 'terms' %}">Terms of Service</a>
       and <a href="{% url 'privacy' %}">Privacy Policy</a>

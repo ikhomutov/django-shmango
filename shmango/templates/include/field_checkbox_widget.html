@@ -1,0 +1,16 @@
+<div class="form-group">
+  <label class="checkbox-inline">
+    <input type="checkbox"
+           name="{{ input.name }}"
+           {% if input.value %}value="{{ input.value }}"{% endif %}
+    />
+    {{ input.label }}
+  </label>
+  {% if input.errors %}
+    <div class="invalid-feedback">
+      {{ input.errors }}
+    </div>
+  {% endif %}
+</div>
+
+

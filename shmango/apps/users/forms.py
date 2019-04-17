@@ -26,6 +26,9 @@ class SignupForm(UserCreationForm):
         label='Confirm Password',
         strip=False,
     )
+    subscribed = forms.BooleanField(
+        label="I'd like to receive news and offers"
+    )
 
     class Meta:
         model = User
@@ -35,12 +38,11 @@ class SignupForm(UserCreationForm):
 
     def save(self, **kwargs):
         user = super().save(**kwargs)
-        first_name = self.cleaned_data.get('first_name')
-        last_name = self.cleaned_data.get('last_name')
         profile = Profile(
             user=user,
-            first_name=first_name,
-            last_name=last_name
+            first_name=self.cleaned_data.get('first_name'),
+            last_name=self.cleaned_data.get('last_name'),
+            subscribed=self.cleaned_data.get('subscribed'),
         )
         profile.save()
 
