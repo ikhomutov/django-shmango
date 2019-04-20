@@ -51,7 +51,7 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'shmango.apps.users.apps.UsersConfig',
-    'shmango.apps.profiles',
+    'shmango.apps.profiles.apps.ProfilesConfig',
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -231,6 +231,4 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
-    # 'social_core.pipeline.social_auth.associate_by_email',
-    'shmango.apps.profiles.signals.create_profile',
 )

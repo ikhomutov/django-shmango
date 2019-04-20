@@ -39,12 +39,9 @@ class SignupForm(UserCreationForm):
 
     def save(self, **kwargs):
         user = super().save(**kwargs)
-        profile = Profile(
-            user=user,
-            first_name=self.cleaned_data.get('first_name'),
-            last_name=self.cleaned_data.get('last_name'),
-            subscribed=self.cleaned_data.get('subscribed'),
-        )
+        profile = user.profile
+        profile.first_name = self.cleaned_data.get('first_name')
+        profile.last_name = self.cleaned_data.get('last_name')
         profile.save()
         return user
 
