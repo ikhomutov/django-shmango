@@ -27,7 +27,8 @@ class SignupForm(UserCreationForm):
         strip=False,
     )
     subscribed = forms.BooleanField(
-        label="I'd like to receive news and offers"
+        label="I'd like to receive news and offers",
+        required=False
     )
 
     class Meta:
@@ -45,6 +46,7 @@ class SignupForm(UserCreationForm):
             subscribed=self.cleaned_data.get('subscribed'),
         )
         profile.save()
+        return user
 
 
 class LoginForm(forms.Form):
