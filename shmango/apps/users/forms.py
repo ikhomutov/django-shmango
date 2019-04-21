@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 
-from shmango.apps.profiles.models import Profile
 from .models import User
 
 
