@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.core.mail import send_mail
 from django.db import models
-from django.urls import reverse
 
 from . import constants
 from .managers import UserManager
@@ -17,11 +16,15 @@ class User(AbstractBaseUser, PermissionsMixin):
         choices=constants.BLOCK_REASONS,
         default=constants.NONE
     )
-    date_blocked = models.DateTimeField(null=True, blank=True)
-    date_joined = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now=True)
+    block_date = models.DateTimeField(null=True, blank=True)
+    join_date = models.DateTimeField(auto_now_add=True)
+    modify_date = models.DateTimeField(auto_now=True)
+    last_login_date = models.DateTimeField(blank=True, null=True)
+    last_login_ip = models.GenericIPAddressField(blank=True, null=True)
 
     objects = UserManager()
+
+    last_login = None
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
@@ -36,6 +39,3 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
-
-    def get_absolute_url(self):
-        return reverse("users:detail", kwargs={"pk": self.id})

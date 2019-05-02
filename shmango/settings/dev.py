@@ -24,4 +24,3 @@ INTERNAL_IPS = ['127.0.0.1', '10.0.2.2']
 # whitenoise
 # ------------------------------------------------------------------------------
 INSTALLED_APPS.insert(0, 'whitenoise.runserver_nostatic')  # noqa F405
-

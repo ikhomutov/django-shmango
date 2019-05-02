@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}{{ block.super }} - Log In{% endblock %}
 {% block content %}
-  <form class="form-custom" method="POST" action="{% url 'users:login' %}">
+  <form class="form-custom" method="POST" action="{% url 'accounts:login' %}">
     {% if form.non_field_errors %}
     <div class="alert alert-danger">
         {% for error in form.non_field_errors %}
@@ -12,8 +12,8 @@
 
     <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
     {% csrf_token %}
-    {% include 'include/field_email_widget.html' with input=form.email %}
-    {% include 'include/field_password_widget.html' with input=form.password %}
+    {% include 'fields/field_email_widget.html' with input=form.email %}
+    {% include 'fields/field_password_widget.html' with input=form.password %}
     <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
     <div class="or-seperator"><b>or</b></div>
     <p class="text-center">Login with your social media account</p>
@@ -21,6 +21,5 @@
       <a href="{% url 'social:begin' 'github' %}" class="social-github"><i class="fa fa-github"></i>&nbsp;  GitHub</a>
       <a href="{% url 'social:begin' 'google-oauth2' %}" class="social-google"><i class="fa fa-google"></i>&nbsp;  Google</a>
     </p>
-    <p class="text-center text-muted small">Don't have an account? <a href="{% url 'users:signup' %}">Sign up here!</a></p>
   </form>
 {% endblock %}
