@@ -1,4 +1,7 @@
-class BaseURLMiddleware:
+from django.utils.deprecation import MiddlewareMixin
+
+
+class ExtractIPMiddleware(MiddlewareMixin):
     def process_request(self, request):
         ip = request.META.get("HTTP_X_FORWARDED_FOR")
         if ip:

@@ -50,16 +50,17 @@ THIRD_PARTY_APPS = [
     'social_django',
 ]
 LOCAL_APPS = [
-    'shmango.apps.users.apps.UsersConfig',
+    'shmango.apps.accounts.apps.AccountsConfig',
+    'shmango.apps.registration.apps.RegistrationConfig',
     'shmango.apps.profiles.apps.ProfilesConfig',
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
-AUTH_USER_MODEL = 'users.User'
-LOGIN_URL = "users:login"
-LOGIN_REDIRECT_URL = "users:index"
+AUTH_USER_MODEL = 'accounts.User'
+LOGIN_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "index"
 
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.github.GithubOAuth2',
@@ -96,6 +97,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'shmango.middleware.ExtractIPMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
@@ -166,7 +168,7 @@ EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[Example]')
 # ------------------------------------------------------------------------------
 ADMIN_URL = env('DJANGO_ADMIN_URL', default='admin/')
 ADMINS = [
-    ("""Ivan Khomutov""", 'iskhomutov@gmail.com'),
+    ("""Ivan Khomutov""", 'i.khomutov@protonmail.com'),
 ]
 MANAGERS = ADMINS
 
@@ -214,8 +216,8 @@ LOGGING = {
 
 # SOCIAL AUTH APP
 # ------------------------------------------------------------------------------
-SOCIAL_AUTH_USER_MODEL = 'users.User'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'users:index'
+SOCIAL_AUTH_USER_MODEL = 'accounts.User'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'index'
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 SOCIAL_AUTH_GITHUB_KEY = env.str('GITHUB_KEY', default='')
 SOCIAL_AUTH_GITHUB_SECRET = env.str('GITHUB_SECRET', default='')

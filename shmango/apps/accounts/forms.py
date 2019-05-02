@@ -1,48 +1,5 @@
 from django import forms
 from django.contrib.auth import authenticate
-from django.contrib.auth.forms import UserCreationForm
-
-from .models import User
-
-
-class SignupForm(UserCreationForm):
-    first_name = forms.CharField(
-        label='First Name',
-        required=False,
-    )
-    last_name = forms.CharField(
-        label='Last Name',
-        required=False,
-    )
-    email = forms.EmailField(
-        label='Email',
-    )
-    password1 = forms.CharField(
-        label='Password',
-        strip=False,
-    )
-    password2 = forms.CharField(
-        label='Confirm Password',
-        strip=False,
-    )
-    subscribed = forms.BooleanField(
-        label="I'd like to receive news and offers",
-        required=False
-    )
-
-    class Meta:
-        model = User
-        fields = (
-            'email',
-        )
-
-    def save(self, **kwargs):
-        user = super().save(**kwargs)
-        profile = user.profile
-        profile.first_name = self.cleaned_data.get('first_name')
-        profile.last_name = self.cleaned_data.get('last_name')
-        profile.save()
-        return user
 
 
 class LoginForm(forms.Form):
@@ -69,8 +26,7 @@ class LoginForm(forms.Form):
     error_messages = {
         'invalid_login':
             'Please enter a correct email and password. Note that both '
-            'fields may be case-sensitive.'
-        ,
+            'fields may be case-sensitive.',
         'inactive': 'This account is inactive.',
     }
 

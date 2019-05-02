@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}{{ block.super }} - Sign Up{% endblock %}
 {% block content %}
-  <form class="form-custom" method="post" action="{% url 'users:signup' %}">
+  <form class="form-custom" method="post" action="{% url 'registration:signup' %}">
     {% if form.non_field_errors %}
       <div class="alert alert-danger">
         {% for error in form.non_field_errors %}
@@ -16,12 +16,9 @@
     </div>
     <div class="or-seperator"><b>or</b></div>
     {% csrf_token %}
-    {% include 'include/field_text_widget.html' with input=form.first_name %}
-    {% include 'include/field_text_widget.html' with input=form.last_name %}
-    {% include 'include/field_email_widget.html' with input=form.email %}
-    {% include 'include/field_password_widget.html' with input=form.password1 %}
-    {% include 'include/field_password_widget.html' with input=form.password2 %}
-    {% include 'include/field_checkbox_widget.html' with input=form.subscribed %}
+    {% include 'fields/field_email_widget.html' with input=form.email %}
+    {% include 'fields/field_password_widget.html' with input=form.password1 %}
+    {% include 'fields/field_password_widget.html' with input=form.password2 %}
     <div class="text-justify text-muted small">
       By signing up, I agree to the <a href="{% url 'terms' %}">Terms of Service</a>
       and <a href="{% url 'privacy' %}">Privacy Policy</a>
@@ -29,7 +26,7 @@
     <button class="my-4 btn btn-lg btn-success btn-block" type="submit">Register</button>
     <div class="text-justify font-weight-bold small">
       <p class="float-left my-1">Already have an account?</p>
-      <a href="{% url 'users:login' %}" class="btn btn-outline-primary btn-sm float-right px-4">LOG IN</a>
+      <a href="{% url 'accounts:login' %}" class="btn btn-outline-primary btn-sm float-right px-4">LOG IN</a>
     </div>
   </form>
 {% endblock %}

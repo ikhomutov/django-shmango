@@ -6,6 +6,19 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
+    path(
+        '',
+        include(
+            ('shmango.apps.accounts.urls', 'accounts'), namespace='accounts'
+        ),
+    ),
+    path(
+        '',
+        include(
+            ('shmango.apps.registration.urls', 'registration'),
+            namespace='registration'
+        ),
+    ),
     path('oauth/', include('social_django.urls', namespace='social')),
     path(
         'terms/',
@@ -22,7 +35,7 @@ urlpatterns = [
         TemplateView.as_view(template_name='pages/about.html'),
         name='about'
     ),
-    path('', include(('shmango.apps.users.urls', 'users'), namespace='users')),
+    path('', TemplateView.as_view(template_name='index.html'), name='index'),
 ]
 
 if settings.DEBUG:
