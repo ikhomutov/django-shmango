@@ -4,3 +4,4 @@ django-redis==4.10.0  # https://github.com/niwinz/django-redis
 social-auth-app-django==3.1.0  # https://github.com/python-social-auth/social-app-django
 whitenoise==4.1.2  # https://github.com/evansd/whitenoise
 psycopg2-binary==2.8.1  # https://github.com/psycopg/psycopg2
+Pillow==6.0.0  # https://github.com/python-pillow/Pillow

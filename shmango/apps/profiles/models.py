@@ -14,6 +14,12 @@ class Profile(models.Model):
         choices=constants.GENDERS,
         default=constants.GENDER_NONE,
     )
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    birth_date = models.DateField(blank=True, null=True)
+    location = models.CharField(max_length=64, blank=True)
+    website = models.URLField(blank=True)
+    phone = models.CharField(max_length=10, blank=True)
+    bio = models.TextField()
 
     def __str__(self):
         return self.get_full_name()

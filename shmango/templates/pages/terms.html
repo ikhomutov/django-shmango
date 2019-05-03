@@ -1,13 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'site.html' %}
 {% block title %}{{ block.super }} - Terms of Service{% endblock %}
-{% block content %}
-  <main role="main" class="container">
-    <div class="jumbotron">
-      <h1>This page contains terms of service for this site.</h1>
-      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab error expedita magnam nobis sed? Architecto aspernatur atque commodi consequuntur culpa dolorem ipsum, maiores non odio pariatur perspiciatis sed ullam, velit.</p>
-      <a href="{% url 'users:index' %}">Go to main page</a>
-    </div>
-  </main>
+{% block main %}
+  <div class="jumbotron">
+    <h1>This page contains terms of service for this site.</h1>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab error expedita magnam nobis sed? Architecto aspernatur atque commodi consequuntur culpa dolorem ipsum, maiores non odio pariatur perspiciatis sed ullam, velit.</p>
+    <a href="{% url 'index' %}">Go to main page</a>
+  </div>
 {% endblock %}
 
 
