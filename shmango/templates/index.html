@@ -1,10 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'site.html' %}
 {% block title %}{{ block.super }} - Main{% endblock %}
-{% block content %}
-    <main role="main" class="container">
-      <div class="jumbotron">
-        <h1>You are logged in as {{ request.user }}.</h1>
-        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab error expedita magnam nobis sed? Architecto aspernatur atque commodi consequuntur culpa dolorem ipsum, maiores non odio pariatur perspiciatis sed ullam, velit.</p>
-      </div>
-    </main>
+{% block main %}
+  <div class="jumbotron">
+    <h1>Welcome to Shmango World!</h1>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab error expedita magnam nobis sed? Architecto aspernatur atque commodi consequuntur culpa dolorem ipsum, maiores non odio pariatur perspiciatis sed ullam, velit.</p>
+    {% if not request.user.is_authenticated %}
+    <a class="btn btn-lg btn-primary" href="{% url 'registration:signup' %}" role="button">Join Now</a>
+    {% endif %}
+  </div>
 {% endblock %}
